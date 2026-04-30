@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { Car, Gauge, Fuel, Calendar, Wrench, AlertTriangle, ShieldCheck, ShieldAlert, ShieldX } from 'lucide-react'
 import type { CtResult, InterventionType, InterventionMetadata, CtMetadata, PartType } from '../types'
 import { TAG_MAP } from '../utils/interventionTags'
-import { Paperclip, FileText, ImageIcon, File } from 'lucide-react'
+import AttachmentList from '../components/AttachmentList'
 import { format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { supabase } from '../lib/supabase'
@@ -192,22 +192,7 @@ export default function Share() {
                           )}
                           {i.description && <p className="text-sm text-gray-500 mt-1">{i.description}</p>}
                           {i.attachments && i.attachments.length > 0 && (
-                            <div className="mt-2">
-                              <p className="text-xs text-gray-400 flex items-center gap-1 mb-1">
-                                <Paperclip className="w-3 h-3" /> {i.attachments.length} document{i.attachments.length > 1 ? 's' : ''} joint{i.attachments.length > 1 ? 's' : ''}
-                              </p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {i.attachments.map((att, idx) => {
-                                  const Icon = att.mimeType.startsWith('image/') ? ImageIcon : att.mimeType === 'application/pdf' ? FileText : File
-                                  return (
-                                    <span key={idx} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-gray-200 bg-gray-50 text-xs text-gray-600">
-                                      <Icon className="w-3.5 h-3.5 shrink-0" />
-                                      <span className="max-w-[120px] truncate">{att.name}</span>
-                                    </span>
-                                  )
-                                })}
-                              </div>
-                            </div>
+                            <AttachmentList attachments={i.attachments} />
                           )}
                           {i.garage && (
                             <p className="text-xs text-gray-400 mt-1">
