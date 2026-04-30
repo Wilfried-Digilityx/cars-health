@@ -160,9 +160,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
     if (!user) { setData(empty); return }
     setIsLoading(true)
     const [v, i, a] = await Promise.all([
-      supabase.from('vehicles').select('*').eq('user_id', user.id).order('created_at'),
-      supabase.from('interventions').select('*').eq('user_id', user.id).order('date', { ascending: false }),
-      supabase.from('alerts').select('*').eq('user_id', user.id).order('created_at'),
+      supabase.from('vehicles').select('*').order('created_at'),
+      supabase.from('interventions').select('*').order('date', { ascending: false }),
+      supabase.from('alerts').select('*').order('created_at'),
     ])
     setData({
       vehicles: (v.data ?? []).map(vehicleFromDb),
