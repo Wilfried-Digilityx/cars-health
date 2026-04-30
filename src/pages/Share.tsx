@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { Car, Gauge, Fuel, Calendar, Wrench, AlertTriangle, ShieldCheck, ShieldAlert, ShieldX } from 'lucide-react'
 import type { CtResult, InterventionType, InterventionMetadata, CtMetadata, PartType } from '../types'
 import { TAG_MAP } from '../utils/interventionTags'
-import AttachmentList from '../components/AttachmentList'
+import ShareAttachmentList from '../components/ShareAttachmentList'
 import { format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { supabase } from '../lib/supabase'
@@ -192,7 +192,7 @@ export default function Share() {
                           )}
                           {i.description && <p className="text-sm text-gray-500 mt-1">{i.description}</p>}
                           {i.attachments && i.attachments.length > 0 && (
-                            <AttachmentList attachments={i.attachments} />
+                            <ShareAttachmentList attachments={i.attachments} />
                           )}
                           {i.garage && (
                             <p className="text-xs text-gray-400 mt-1">
