@@ -121,12 +121,12 @@ export default function Dashboard() {
           <div className="space-y-2">
             {dueAlerts.slice(0, 4).map(s => {
               const color = getAlertColor(s!.status)
-              const colorMap = {
+              const colorMap: Record<'red' | 'amber' | 'green', string> = {
                 red: 'border-red-200 bg-red-50',
                 amber: 'border-amber-200 bg-amber-50',
                 green: 'border-green-200 bg-green-50',
               }
-              const textMap = {
+              const textMap: Record<'red' | 'amber' | 'green', string> = {
                 red: 'text-red-700',
                 amber: 'text-amber-700',
                 green: 'text-green-700',

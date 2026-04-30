@@ -126,9 +126,9 @@ export default function Alerts() {
                 </h2>
                 <div className="space-y-2">
                   {items.map(s => {
-                    const borderMap = { red: 'border-red-200', amber: 'border-amber-200', green: 'border-gray-200' }
-                    const bgMap = { red: 'bg-red-50', amber: 'bg-amber-50', green: 'bg-white' }
-                    const textMap = { red: 'text-red-700', amber: 'text-amber-700', green: 'text-green-700' }
+                    const borderMap: Record<'red' | 'amber' | 'green', string> = { red: 'border-red-200', amber: 'border-amber-200', green: 'border-gray-200' }
+                    const bgMap: Record<'red' | 'amber' | 'green', string> = { red: 'bg-red-50', amber: 'bg-amber-50', green: 'bg-white' }
+                    const textMap: Record<'red' | 'amber' | 'green', string> = { red: 'text-red-700', amber: 'text-amber-700', green: 'text-green-700' }
                     const c = getAlertColor(s!.status)
                     return (
                       <div

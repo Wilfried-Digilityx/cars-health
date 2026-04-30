@@ -52,7 +52,7 @@ export function evaluateAlert(alert: Alert, vehicle: Vehicle): AlertStatus {
   return { alert, isDue, isOverdue, daysUntil, milesUntil, message }
 }
 
-export function getAlertColor(status: AlertStatus): string {
+export function getAlertColor(status: AlertStatus): 'red' | 'amber' | 'green' {
   if (status.isOverdue) return 'red'
   if (status.isDue) return 'amber'
   return 'green'

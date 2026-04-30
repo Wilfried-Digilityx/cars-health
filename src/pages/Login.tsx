@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { Car, LogIn, UserPlus } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 export default function Login() {
   const { user, signIn, signUp } = useAuth()
+  const navigate = useNavigate()
   const [mode, setMode] = useState<'login' | 'signup'>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -94,6 +95,13 @@ export default function Login() {
                 <><UserPlus className="w-4 h-4" /> Créer le compte</>
               )}
             </button>
+            {mode === 'login' && (
+              <p className="text-center text-sm text-gray-500 mt-3">
+                <button className="text-blue-600 hover:underline" onClick={() => navigate('/forgot-password')}>
+                  Mot de passe oublié ?
+                </button>
+              </p>
+            )}
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">

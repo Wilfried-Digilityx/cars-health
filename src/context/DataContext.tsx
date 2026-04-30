@@ -160,9 +160,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
     if (!user) { setData(empty); return }
     setIsLoading(true)
     const [v, i, a] = await Promise.all([
-      supabase.from('vehicles').select('*').order('created_at'),
-      supabase.from('interventions').select('*').order('date', { ascending: false }),
-      supabase.from('alerts').select('*').order('created_at'),
+      supabase.from('vehicles').select('*').eq('user_id', user.id).order('created_at'),
+      supabase.from('interventions').select('*').eq('user_id', user.id).order('date', { ascending: false }),
+      supabase.from('alerts').select('*').eq('user_id', user.id).order('created_at'),
     ])
     setData({
       vehicles: (v.data ?? []).map(vehicleFromDb),
@@ -190,7 +190,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const deleteVehicle = useCallback(async (id: string) => {
     if (!user) return
-    const { error } = await supabase.from('vehicles').delete().eq('id', id)
+    const { error } = await supabase.from('vehicles').delete().eq('id', id).eq('user_id', user.id)
     if (error) throw new Error(error.message)
     await fetchAll()
   }, [user, fetchAll])
@@ -211,7 +211,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const deleteIntervention = useCallback(async (id: string) => {
     if (!user) return
-    const { error } = await supabase.from('interventions').delete().eq('id', id)
+    const { error } = await supabase.from('interventions').delete().eq('id', id).eq('user_id', user.id)
     if (error) throw new Error(error.message)
     await fetchAll()
   }, [user, fetchAll])
@@ -232,7 +232,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const deleteAlert = useCallback(async (id: string) => {
     if (!user) return
-    const { error } = await supabase.from('alerts').delete().eq('id', id)
+    const { error } = await supabase.from('alerts').delete().eq('id', id).eq('user_id', user.id)
     if (error) throw new Error(error.message)
     await fetchAll()
   }, [user, fetchAll])
